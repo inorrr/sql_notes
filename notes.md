@@ -124,6 +124,7 @@ SELECT `name` FROM `student` ORDER BY `score` ASC;
 SELECT `name` FROM `student` ORDER BY `score` DESC; 
 SELECT `name` FROM `student` ORDER BY `score`, `student_id`; //order by score, if same then order by student_id
 SELECT `name` FROM `student` LIMIT 3; //get the first 3 row
+SELECT DISTINCT `major` FROM `student`; //distinct majors
 ```
 `AEC` means ascending order, this is default, which means that the result will be in acending order if ASC is not given. DESC means decending order. 
 

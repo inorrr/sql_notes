@@ -1,3 +1,7 @@
+## Table of Contents ##
+1. [Introduction](https://github.com/inorrr/sql_notes/edit/main/notes.md#introduction)
+2. [Basic Structures](https://github.com/inorrr/sql_notes/edit/main/notes.md#basic-structures)
+
 ## Introduction ##
 
 资料库管理系统（DBMS）database management system: 连接应用和资料库，检索，添加，删除资料

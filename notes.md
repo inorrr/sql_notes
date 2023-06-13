@@ -138,3 +138,12 @@ SELECT * FROM `student` WHERE `major` IN('历史', '英语', '生物');
 SELECT * FROM `student` WHERE `major` = '历史' OR `major` =  '英语' OR `major` =  '生物');
 ```
 The above two lines are equal. 
+
+### Example: Company Database
+
+Employee
+| student_id        | name           |major   |
+| :-------------: |:-------------:| :-----:|
+| 101      | Amy | History|
+| 102      | Bob      |   English |
+| 103 | Cathy     |    Biology |

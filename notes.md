@@ -216,7 +216,7 @@ CREATE TABLE 'works_with'(
 );
 ```
 ### Adding Data ###
-#### Employee ####
+#### Attempt ####
 ```
 INSERT INTO `employee` VALUES(206, `小黄`, `1998-10-08`, `F`, 50000, 1, NULL);
 ```
@@ -225,11 +225,15 @@ Note that the above code will error, becuase branch is a foreign key that refers
 In order to solve this, we can add data to the branch table first, leave the `manager_id` column empty. 
 Later we change `manager_id` to the correct value.
 
+#### Branch
+
 ```
 INSERT INTO `branch` VALUES(1, `研发`, NULL);
 INSERT INTO `branch` VALUES(2, `行政`, NULL);
 INSERT INTO `branch` VALUES(3, `咨询`, NULL);
 ```
+
+#### Employee
 
 Next we add data to the employee table
 ```
@@ -246,7 +250,7 @@ UPDATE `branch`  SET `manager_id` = 206 WHERE `branch_id` = 1;
 UPDATE `branch`  SET `manager_id` = 207 WHERE `branch_id` = 2;
 UPDATE `branch`  SET `manager_id` = 208 WHERE `branch_id` = 3;
 ```
-Add client data
+#### Client Data
 
 ```
 INSERT INTO `client` VALUES(400, `阿狗`, 254354335);
@@ -256,7 +260,7 @@ INSERT INTO `client` VALUES(403, `露西`, 5894892345);
 INSERT INTO `client` VALUES(404, `派克`, 2837565732);
 ```
 
-Add work_with data
+#### works_with data
 ```
 INSERT INTO `works_with` VALUES(206, 400, `70000`);
 INSERT INTO `works_with` VALUES(207, 401, `24000`);
@@ -266,7 +270,8 @@ INSERT INTO `works_with` VALUES(210, 404, `87940`);
 
 ```
 
-Exercise
+### Exercise
+
 1. get all employee data ``SELECT * FROM `employee`;``
 2. get all client data ``SELECT * FROM `client`;``
 3. get all employee data, order of acending salary ``SELECT * FROM `employee` ORDER BY `salary` ASC; ``
@@ -274,3 +279,6 @@ Exercise
 5. all employee names ``SELECT `name` FROM `employee`; ``
 
 ## Aggregate Functions ##
+
+1. Number of employees ``SELECT COUNT(*) FROM `employee`;``
+2. 

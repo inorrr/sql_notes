@@ -252,3 +252,10 @@ INSERT INTO `works_with` VALUES(209, 403, `24000`);
 INSERT INTO `works_with` VALUES(210, 404, `87940`);
 
 ```
+
+Exercise
+1. get all employee data ``SELECT * FROM `employee`;``
+2. get all client data ``SELECT * FROM `client`;``
+3. get all employee data, order of acending salary ``SELECT * FROM `employee` ORDER BY `salary` ASC; ``
+4. top 3 highest salary employee ``SELECT * FROM `employee` ORDER BY `salary` DESC LIMIT 3;``
+5. all employee names ``SELECT `name` FROM `employee`; ``

@@ -272,3 +272,5 @@ Exercise
 3. get all employee data, order of acending salary ``SELECT * FROM `employee` ORDER BY `salary` ASC; ``
 4. top 3 highest salary employee ``SELECT * FROM `employee` ORDER BY `salary` DESC LIMIT 3;``
 5. all employee names ``SELECT `name` FROM `employee`; ``
+
+## Aggregate Functions ##

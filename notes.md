@@ -116,7 +116,7 @@ DELETE FROM `student`
 WHERE `student_id` = 4 and ` name` = ‘小灰’ ; //everything in this table will be deleted if there’s no WHERE
 ```
 
-### select 检索资料/搜索资料
+### Select 检索资料/搜索资料
 
 ```
 SELECT `name`, `major` FROM `student` ;  //选择name, major, star means everything
@@ -139,11 +139,116 @@ SELECT * FROM `student` WHERE `major` = '历史' OR `major` =  '英语' OR `majo
 ```
 The above two lines are equal. 
 
-### Example: Company Database
+## Example: Company Database
 
-Employee
-| student_id        | name           |major   |
-| :-------------: |:-------------:| :-----:|
-| 101      | Amy | History|
-| 102      | Bob      |   English |
-| 103 | Cathy     |    Biology |
+<img width="479" alt="Screen Shot 2023-06-11 at 9 57 07 AM" src="https://github.com/inorrr/sql_notes/assets/94703030/2c7a04ee-e74a-493e-9472-072090ba3a70">
+
+### Creating Tables ###
+#### Employee Table ####
+
+```
+CREATE TABLE `employee`(
+    `emp_id` INT PRIMARY KEY,
+    `name` VARCHAR(20), 
+    `birth_date` DATE, 
+    `sex` VARCHAR(1), 
+    `salary` INT, 
+    `branch_id` INT, 
+    `sup_id` INT
+);
+```
+Note that as this point this is the only table exists, so we cannot set any foreign key.
+#### Branch Table ####
+```
+CREATE TABLE `branch`(
+    `branch_id` INT PRIMARY KEY,
+    `branch_name` VARCHAR(20), 
+    `manager_id` INT,
+    FOREIGN KEY(`manager_id`) REFERENCES `employee`(`emp_id`) ON DELETE SET NULL
+);
+```
+The last line is setting foreign key. It means that `manager_id` in this table refers to `emp_id` in the employee table.
+
+Now we have the branch table, we can set the doreign keys in the employee table.
+```
+ALTER TABLE `employee`
+ADD FOREIGN KEY(`branch_id`)
+REFERENCES `branch`(`branch_id`)
+ON DELETE SET NULL;
+
+ALTER TABLE `employee`
+ADD FOREIGN KEY(`sup_id`)
+REFERENCES `employee`(`emp_id`)
+ON DELETE SET NULL;
+```
+
+#### Client Table ####
+```
+CREATE TABLE `client`(
+    `client_id` INT PRIMARY KEY,
+    `client_name` VARCHAR(20),
+    `phone` VARCHAR(20)
+);
+```
+
+#### Work_with Table ####
+```
+CREATE TABLE 'works_with'(
+    `emp_id` INT,
+    `client_id` INT,
+    `totle_sales` int,
+    PRIMARY KEY(`emp_id`, `client_id`),
+    FOREIGN KEY(`emp_id`) REFERENCES `employee`(`emp_id`) ON DELETE CASCADE,
+    FOREIGN KEY('client_id') REFERENCES `client`(`client_id`) ON DELETE CASCASE
+);
+```
+### Adding Data ###
+#### Employee ####
+```
+INSERT INTO `employee` VALUES(206, `小黄`, `1998-10-08`, `F`, 50000, 1, NULL);
+```
+Note that the above code will error, becuase branch is a foreign key that refers to the primary key of the branch table, but at this point we don't have any data in the branch table with the value 1.
+
+In order to solve this, we can add data to the branch table first, leave the `manager_id` column empty. 
+Later we change `manager_id` to the correct value.
+
+```
+INSERT INTO `branch` VALUES(1, `研发`, NULL);
+INSERT INTO `branch` VALUES(2, `行政`, NULL);
+INSERT INTO `branch` VALUES(3, `咨询`, NULL);
+```
+
+Next we add data to the employee table
+```
+INSERT INTO `employee` VALUES(206, `小黄`, `1998-10-08`, `F`, 50000, 1, NULL);
+INSERT INTO `employee` VALUES(207, `小绿`, `1985-09-06`, `	M`, 29000, 2, 206);
+INSERT INTO `employee` VALUES(208, `小黑`, `2000-12-19`, `M`, 35000, 3, 206);
+INSERT INTO `employee` VALUES(209, `小白`, `1997-01-22`, `F`, 39000, 3, 207);
+INSERT INTO `employee` VALUES(210, `小蓝`, `1925-11-10`, `F`, 84000, 1, 207);
+```
+
+Now we change manager_id to the correct value 
+```
+UPDATE `branch`  SET `manager_id` = 206 WHERE `branch_id` = 1;
+UPDATE `branch`  SET `manager_id` = 207 WHERE `branch_id` = 2;
+UPDATE `branch`  SET `manager_id` = 208 WHERE `branch_id` = 3;
+```
+Add client data
+
+```
+INSERT INTO `client` VALUES(400, `阿狗`, 254354335);
+INSERT INTO `client` VALUES(401, `阿猫`, 9182749398);
+INSERT INTO `client` VALUES(402, `旺财`, 7278364753);
+INSERT INTO `client` VALUES(403, `露西`, 5894892345);
+INSERT INTO `client` VALUES(404, `派克`, 2837565732);
+```
+
+Add work_with data
+```
+INSERT INTO `works_with` VALUES(206, 400, `70000`);
+INSERT INTO `works_with` VALUES(207, 401, `24000`);
+INSERT INTO `works_with` VALUES(208, 402, `9800`);
+INSERT INTO `works_with` VALUES(209, 403, `24000`);
+INSERT INTO `works_with` VALUES(210, 404, `87940`);
+
+```

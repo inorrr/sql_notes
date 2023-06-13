@@ -110,11 +110,19 @@ We can use ``SHOW VARIABLES LIKE "sql_safe_updates";`` or ``select @@sql_safe_up
 ```
 UPDATE `student`           // we want to update this table
 SET `major` = `英语文学`    // change major to 英语文学
-WHERE `major` = `英语`;    // of those that has major is 英语  // this is a condition, can have more than one, 
-//WHERE `major` = `生物` OR `major` = `化学`      // note that the above is one big command, if there;’s no condition given, then all of the rows will be changed
-DELETE FROM `student`
-WHERE `student_id` = 4 and ` name` = ‘小灰’ ; //everything in this table will be deleted if there’s no WHERE
+WHERE `major` = `英语`;    // of those that has major is 英语
 ```
+In the student table, change all major with 英语 to 英语文学
+
+```
+WHERE `major` = `生物` OR `major` = `化学`
+```
+There can be more than one codition, connected by `AND` or `OR`. If there's no condition given, it means all of the rows.
+```
+DELETE FROM `student`
+WHERE `student_id` = 4 and ` name` = ‘小灰’ ; 
+```
+Remove row
 
 ### Select 检索资料/搜索资料
 

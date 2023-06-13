@@ -281,4 +281,5 @@ INSERT INTO `works_with` VALUES(210, 404, `87940`);
 ## Aggregate Functions ##
 
 1. Number of employees ``SELECT COUNT(*) FROM `employee`;``
-2. 
+2. Number of female employees borned after 1970-01-01 ``SELECT COUNT(*) FROM `employee` WHERE `birth_date` > `1970-01-01` and `sex` = `F`; ``
+3. Average salary of all employees. ``SELECT AVG(`salary`) FROM `employee`;``

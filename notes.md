@@ -120,10 +120,21 @@ WHERE `student_id` = 4 and ` name` = ‘小灰’ ; //everything in this table w
 
 ```
 SELECT `name`, `major` FROM `student` ;  //选择name, major, star means everything
-SELECT `name` FROM `student` ORDER BY `score` ASC; //ascending order, default, will in this order if not specified
-SELECT `name` FROM `student` ORDER BY `score` DESC; //descending order 
+SELECT `name` FROM `student` ORDER BY `score` ASC; 
+SELECT `name` FROM `student` ORDER BY `score` DESC; 
 SELECT `name` FROM `student` ORDER BY `score`, `student_id`; //order by score, if same then order by student_id
 SELECT `name` FROM `student` LIMIT 3; //get the first 3 row
-
-//WHERE can also be used here
 ```
+`AEC` means ascending order, this is default, which means that the result will be in acending order if ASC is not given. DESC means decending order. 
+
+```
+//WHERE can also be used here
+SELECT * FROM `student` WHERE `major` = `英语` or `score` > 20;
+```
+`>`,`<`, `>=`, `<=` are all valid, `<>` means not equal to
+
+```
+SELECT * FROM `student` WHERE `major` IN('历史', '英语', '生物');
+SELECT * FROM `student` WHERE `major` = '历史' OR `major` =  '英语' OR `major` =  '生物');
+```
+The above two lines are equal. 
